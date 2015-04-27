@@ -10,6 +10,8 @@ angry-grandpa runs in Vagrant VM with a public IP address, which should help pre
 also randomizes the check-in delay when the volume is at an acceptable level.
 
 ## Running angry-grandpa
+To run with a volume limit of 80% against a Sonos player located at 192.168.1.101:
+
 - `vagrant up`
 - `cd /vagrant`
-- `python angrygrandpa.py`
+- `python angrygrandpa.py -v 80 -z 192.168.1.101`
