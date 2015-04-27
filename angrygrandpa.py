@@ -8,32 +8,33 @@ def main(argv):
   except getopt.GetoptError:
     fail()
 
-  volume = None
+  volume_limit = None
   zone = None
 
   for o, a in opts:
     if o in ("-v", "--volume"):
-      volume = a
+      volume_limit = int(a)
     elif o in ("-z", "--zone"):
       zone = a
     else:
       fail()
 
-  if volume is None or zone is None:
+  if volume_limit is None or zone is None:
     fail()
   else:
-    getangry(volume, SoCo(zone))
+    getangry(volume_limit, SoCo(zone))
 
-def getangry(volume, zone):
+def getangry(volume_limit, zone):
   while True:
-    if zone.volume > volume:
-      print "Decreasing volume from %s towards %s" % connection.volume, volume
-      zone.volume -= 5
+    if zone.volume > volume_limit:
+      new_volume = max(0, zone.volume - 5)
+      print "Decreasing volume from {0} to {1}".format(zone.volume, new_volume)
+      zone.volume = new_volume
       time.sleep(30)
     else:
       # Sleep a long time so we don't flood the network
-      sleep_minutes = random.randrange(3, 8)
-      print "Everything's A-OK, checking again in %s minutes" % sleep_minutes
+      sleep_minutes = random.randrange(2,5)
+      print "Everything's A-OK, checking again in {0} minutes".format(sleep_minutes)
       time.sleep(sleep_minutes * 60)
   
 def fail():
@@ -41,7 +42,7 @@ def fail():
   sys.exit(2)
 
 def usage():
-  print 'Usage: ' + sys.argv[0] + ' -v <volume> -z <ipaddr>'
+  print "Usage: {0} -v <volume> -z <ipaddr>".format(sys.argv[0])
 
 if __name__ == "__main__":
   main(sys.argv[1:])
