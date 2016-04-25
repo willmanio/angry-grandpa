@@ -15,3 +15,9 @@ To run with a volume limit of 80% against a Sonos player located at 192.168.1.10
 - `vagrant up`
 - `cd /vagrant`
 - `python angrygrandpa.py -v 80 -z 192.168.1.101`
+
+## Author
+Christian Willman <github@willman.io>
+
+## License
+MIT
